@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "marca": "BMW",
+    "modelo": "M4",
+    "año": 2016,
+    "precio_base": 475000,
+    "descripcion": "BMW M4 2016 en excelente estado",
+    "tiempo_limite": "3 días",
+    "imagen": "https://cdn.motor1.com/images/mgl/qLZl8/s1/2021-bmw-m4.jpg"
+  },
+  {
+    "id": 2,
+    "marca": "Honda",
+    "modelo": "Civic",
+    "año": 2023,
+    "precio_base": 460000,
+    "descripcion": "Honda Civic 2023 nuevo",
+    "tiempo_limite": "5 días",
+    "imagen": "https://cdn.motor1.com/images/mgl/8vJr6/s1/honda-civic-2022.jpg"
+  }
+]

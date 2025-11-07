@@ -1,0 +1,53 @@
+.publicar-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.publicar-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.form-publicar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-publicar input,
+.form-publicar textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.btn-enviar {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn-enviar:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-volver {
+  background: none;
+  color: #2563eb;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}

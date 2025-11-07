@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# Logs
+logs
+*.log
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/

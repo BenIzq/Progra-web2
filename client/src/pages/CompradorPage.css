@@ -1,0 +1,184 @@
+/* --- Layout general --- */
+.comprador-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Header --- */
+.header {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+  height: auto;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-right select {
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #b02a37;
+}
+
+/* --- Contenido principal --- */
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 25px;
+  gap: 30px;
+}
+
+/* --- Vitrina --- */
+.vitrina {
+  flex: 3;
+}
+
+.vitrina h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.vehiculos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.vehiculo-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vehiculo-card:hover {
+  transform: scale(1.03);
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.vehiculo-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.precio {
+  color: #007bff;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.btn-comprar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-comprar:hover {
+  background-color: #0056b3;
+}
+
+/* --- Filtros --- */
+.filtros {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+}
+
+.filtro-seccion {
+  margin-bottom: 25px;
+}
+
+.filtro-seccion h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.filtro-seccion label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.filtro-seccion input,
+.filtro-seccion select {
+  width: 100%;
+  padding: 7px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.btn-filtrar,
+.btn-buscar {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 7px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-filtrar:hover,
+.btn-buscar:hover {
+  background-color: #0056b3;
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+}
