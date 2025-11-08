@@ -1,112 +1,101 @@
-import React from "react";
-import "./CompradorPage.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 
-function CompradorPage() {
-  const vehiculos = [
-    {
-      id: 1,
-      nombre: "BMW M4",
-      año: 2016,
-      precio: "Q. 575,000.00",
-      imagen: "/bmw.jpg",
-    },
-    {
-      id: 2,
-      nombre: "Honda Civic",
-      año: 2023,
-      precio: "Q. 600,000.00",
-      imagen: "/civic.jpg",
-    },
-    {
-      id: 3,
-      nombre: "Toyota Corolla",
-      año: 2019,
-      precio: "Q. 250,000.00",
-      imagen: "/corolla.jpg",
-    },
-    {
-      id: 4,
-      nombre: "Mercedes Benz C63 AMG",
-      año: 2018,
-      precio: "Q. 500,000.00",
-      imagen: "/amg.jpg",
-    },
-  ];
+const socket = io("http://localhost:5000");
+
+const CompradorPage = () => {
+  const [vehiculos, setVehiculos] = useState([]);
+  const navigate = useNavigate();
+
+  // Obtenemos el nombre del comprador actual (guardado al iniciar sesión)
+  const comprador = localStorage.getItem("usuario");
+
+  // 🔹 Cargar todos los vehículos disponibles
+  useEffect(() => {
+    fetch("http://localhost:5000/api/vehiculos")
+      .then((res) => res.json())
+      .then((data) => setVehiculos(data))
+      .catch((err) => console.error("Error al obtener vehículos:", err));
+  }, []);
+
+  // 🔔 Escuchar notificaciones de ganador desde el servidor
+  useEffect(() => {
+    if (!comprador) return;
+
+    socket.on(`notificacionGanador_${comprador}`, (data) => {
+      alert(data.mensaje); // Puedes reemplazar por un modal o toast
+    });
+
+    return () => {
+      socket.off(`notificacionGanador_${comprador}`);
+    };
+  }, [comprador]);
 
   return (
-    <div className="comprador-container">
-      {/* Encabezado */}
-      <header className="header">
-        <div className="header-left">
-          <img src="/logo.png" alt="CarBid" className="logo" />
-          <h1>CarBid</h1>
-        </div>
-        <div className="header-right">
-          <span>Estas ubicado en:</span>
-          <select>
-            <option>Guatemala</option>
-            <option>El Salvador</option>
-            <option>Honduras</option>
-          </select>
-          <button className="logout-btn">✖</button>
-        </div>
-      </header>
+    <div className="container">
+      <h2 className="mt-3">Vehículos disponibles</h2>
 
-      {/* Contenido principal */}
-      <main className="main-content">
-        <section className="vitrina">
-          <h2>Vitrina de Vehículos</h2>
-          <div className="vehiculos-grid">
-            {vehiculos.map((v) => (
-              <div key={v.id} className="vehiculo-card">
-                <img src={v.imagen} alt={v.nombre} />
-                <h3>{v.nombre}</h3>
-                <p>{v.año}</p>
-                <p className="precio">{v.precio}</p>
-                <button className="btn-comprar">Comprar</button>
-              </div>
-            ))}
+      {/* Botón para ir al historial */}
+      <button
+        onClick={() => navigate("/historial")}
+        style={{
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          padding: "8px 16px",
+          borderRadius: "8px",
+          cursor: "pointer",
+          marginBottom: "16px",
+        }}
+      >
+        Ver historial de subastas
+      </button>
+
+      {/* Lista de vehículos */}
+      {vehiculos.length === 0 ? (
+        <p>No hay vehículos disponibles en este momento.</p>
+      ) : (
+        vehiculos.map((auto) => (
+          <div
+            key={auto.id}
+            className="vehiculo-card"
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "10px",
+              padding: "12px",
+              marginBottom: "10px",
+              boxShadow: "2px 2px 8px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h3>
+              {auto.marca} {auto.modelo}
+            </h3>
+            <p>
+              <strong>Precio base:</strong> ${auto.precio_base}
+            </p>
+            <p>
+              <strong>Vendedor:</strong> {auto.vendedor}
+            </p>
+            <button
+              onClick={() => navigate(`/subasta/${auto.id}`)}
+              style={{
+                backgroundColor: "#28a745",
+                color: "white",
+                border: "none",
+                padding: "8px 12px",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Ver Subasta
+            </button>
           </div>
-        </section>
-
-        <aside className="filtros">
-          <div className="filtro-seccion">
-            <h3>Precios</h3>
-            <label>Desde:</label>
-            <input type="number" placeholder="Q.0" />
-            <label>Hasta:</label>
-            <input type="number" placeholder="Q.0" />
-            <button className="btn-filtrar">Filtrar</button>
-          </div>
-
-          <div className="filtro-seccion">
-            <h3>Filtros</h3>
-            <label>Modelo</label>
-            <select>
-              <option>Seleccionar</option>
-            </select>
-
-            <label>Marca</label>
-            <select>
-              <option>Seleccionar</option>
-            </select>
-
-            <label>Año</label>
-            <select>
-              <option>Seleccionar</option>
-            </select>
-
-            <button className="btn-buscar">Buscar</button>
-          </div>
-        </aside>
-      </main>
-
-      {/* Pie de página */}
-      <footer className="footer">
-        Universidad Rafael Landívar
-      </footer>
+        ))
+      )}
     </div>
   );
-}
+};
 
 export default CompradorPage;
+

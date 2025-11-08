@@ -4,6 +4,8 @@ import RegisterPage from "./pages/RegisterPage";
 import CompradorPage from "./pages/CompradorPage";
 import VendedorPage from "./pages/VendedorPage";
 import PublicarVehiculo from "./pages/PublicarVehiculo";
+import SubastaPage from "./pages/SubastaPage";
+import HistorialSubastas from "./pages/HistorialSubastas"; 
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/comprador" element={<CompradorPage />} />
         <Route path="/vendedor" element={<VendedorPage />} />
         <Route path="/publicar" element={<PublicarVehiculo />} />
+        <Route path="/subasta/:id" element={<SubastaPage />} />
+        <Route path="/historial" element={<HistorialSubastas />} /> 
       </Routes>
     </Router>
   );
